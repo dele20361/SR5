@@ -68,6 +68,8 @@ def multiplyVectorMatrix(M, v):
     for i in range(len(M)):
         suma = 0
         for j in range(len(M[0])):
+            # print("M[i][j] ", M[i][j])
+            # print("v[j] ", v[j])
             suma += M[i][j]*v[j]
         res.append(suma)
 
@@ -127,6 +129,7 @@ def getMatrixInverse(m):
             cofactorRow.append(((-1)**(r+c)) * getMatrixDeternminant(minor))
         cofactors.append(cofactorRow)
     cofactors = transposeMatrix(cofactors)
+    cofactors = list(cofactors)
     for r in range(len(cofactors)):
         for c in range(len(cofactors)):
             cofactors[r][c] = cofactors[r][c]/determinant

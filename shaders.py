@@ -1,4 +1,5 @@
 import numpy as np
+import mathlib as ml
 
 def flat(render, **kwargs):
     # Normal calculada por poligono
@@ -22,8 +23,7 @@ def flat(render, **kwargs):
         g *= texColor[1]
         r *= texColor[0]
 
-    dirLight = np.array(render.dirLight)
-    intensity = np.dot(triangleNormal, -dirLight)
+    intensity = ml.dotProduct(triangleNormal, render.dirLight)
 
     b *= intensity
     g *= intensity

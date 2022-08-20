@@ -183,7 +183,6 @@ class Renderer(object):
     def glTransform(self, vertex, matrix):
         v = V4(vertex[0], vertex[1], vertex[2], 1)
         vt = ml.multiplyVectorMatrix(matrix, v)
-        vt = vt.tolist()[0]
         vf = V3(vt[0] / vt[3],
                 vt[1] / vt[3],
                 vt[2] / vt[3])
@@ -193,7 +192,6 @@ class Renderer(object):
     def glDirTransform(self, dirVector, rotMatrix):
         v = V4(dirVector[0], dirVector[1], dirVector[2], 0)
         vt = ml.multiplyVectorMatrix(rotMatrix, v)
-        vt = vt.tolist()[0]
         vf = V3(vt[0],
                 vt[1],
                 vt[2])
@@ -202,10 +200,10 @@ class Renderer(object):
 
     def glCamTransform(self, vertex):
         v = V4(vertex[0], vertex[1], vertex[2], 1)
-        temp = ml.multiplyVectorMatrix(self.viewportMatrix, self.projectionMatrix)
-        temp1 = ml.multiplyVectorMatrix(temp,self.viewMatrix)
+        temp = ml.matrixMultiplication(self.viewportMatrix, self.projectionMatrix)
+        temp1 = ml.matrixMultiplication(temp,self.viewMatrix)
         vt = ml.multiplyVectorMatrix(temp1,v)
-        vt = vt.tolist()[0]
+        # vt = vt.tolist()[0]
         vf = V3(vt[0] / vt[3],
                 vt[1] / vt[3],
                 vt[2] / vt[3])
